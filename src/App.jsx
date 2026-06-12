@@ -784,7 +784,7 @@ export default function Portfolio() {
               { v: "B1", l: "Inglés técnico" },
             ].map(({ v, l }) => (
               <div key={l}>
-                <div className="stat-value">{v}</div>
+                <div className="stat-value" translate="no">{v}</div>
                 <div className="stat-label">{l}</div>
               </div>
             ))}
