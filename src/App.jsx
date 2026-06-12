@@ -1,21 +1,35 @@
 import { useState, useEffect, useRef } from "react";
 
-const NAV_LINKS = ["Inicio", "Sobre mí", "Habilidades", "Proyectos", "Contacto"];
+const NAV_LINKS = ["Inicio", "Sobre mí", "Habilidades", "Experiencia", "Proyectos", "Contacto"];
 
 const SKILLS = {
-  Frontend: ["React", "TypeScript", "JavaScript", "Vite", "HTML5", "CSS3"],
-  Backend: ["Spring Boot", "Java", "Node.js", "REST APIs"],
-  Database: ["PostgreSQL", "MongoDB", "MySQL"],
-  Tools: ["Git", "GitHub", "Kali Linux", "VS Code", "Figma"],
-  "En aprendizaje": ["Cybersecurity", "Docker", "AWS"],
+  Lenguajes: ["Java", "JavaScript", "TypeScript", "C#", "C++"],
+  Frontend: ["React", "TypeScript", "Vite", "Axios", "HTML5", "CSS3", "Bootstrap", "SASS"],
+  "Backend & Frameworks": ["Spring Boot 3.x", "Node.js", "REST APIs", "JWT", "Swagger/OpenAPI"],
+  "Bases de Datos": ["PostgreSQL", "MongoDB"],
+  "DevOps & Herramientas": ["Docker", "Docker Compose", "Kubernetes", "Git", "GitHub"],
+  Ciberseguridad: ["OWASP Top 10", "Seguridad Web", "Hardening de Contenedores", "Kali Linux"],
 };
+
+const EXPERIENCE = [
+  {
+    role: "Encargado de Inventario y Sistemas de Información",
+    company: "Industrias Unidas S.A.",
+    date: "2016 — 2025",
+    bullets: [
+      "Gestión, control y optimización de flujos de inventario y stock mediante la plataforma empresarial AS400.",
+      "Diseño y automatización de reportes de control operativo con modelos avanzados de análisis de datos en Excel.",
+      "Coordinación de equipos internos y resolución de incidencias en entornos de alta demanda, fortaleciendo organización, lógica analítica y toma de decisiones basada en datos.",
+    ],
+  },
+];
 
 const PROJECTS = [
   {
     title: "Hospital Management System",
     description:
-      "Full-stack web application for managing hospital operations including patient records, appointments, and staff. Features role-based authentication and a clean layered architecture.",
-    tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL"],
+      "Full-stack hospital management application built on a decoupled client-server architecture. Backend developed in Spring Boot with a REST API fully documented via Swagger, JWT-based authentication, and full environment orchestration with Docker Compose. Frontend built as a responsive SPA with React and TypeScript.",
+    tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "JWT", "Swagger", "Docker"],
     color: "#00f5c4",
     icon: "🏥",
     github: "https://github.com/irvingVlad/proyecto-Hospital",
@@ -24,8 +38,8 @@ const PROJECTS = [
   {
     title: "Event Management REST API",
     description:
-      "RESTful API for creating and managing events built with Spring Boot. Includes full CRUD operations, input validation, structured error handling, and clean layered architecture.",
-    tech: ["Spring Boot", "Java", "PostgreSQL", "REST API"],
+      "Backend built with an N-Tier layered architecture (Controllers, Services, Repositories, Entities) applying the DTO pattern for secure data transfer. Data persistence with PostgreSQL via JPA/Hibernate, JWT-secured endpoints documented interactively with Swagger, and containerized with Docker.",
+    tech: ["Spring Boot", "Java", "PostgreSQL", "JPA/Hibernate", "JWT", "Swagger", "Docker"],
     color: "#7c6bff",
     icon: "📅",
     github: "https://github.com/SalvadorVentura/UESPOO2025-API_eventos_asistentes_gt02_grupo7",
@@ -498,6 +512,65 @@ const STYLE = `
     letter-spacing: 0.05em;
   }
 
+  /* EXPERIENCE */
+  .exp-list-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .exp-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    padding: 1.75rem 2rem;
+    border-radius: 2px;
+  }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .exp-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .exp-company {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+    font-family: var(--font-mono);
+  }
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .exp-list li {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
   /* CONTACT */
   .contact-inner {
     display: grid;
@@ -694,9 +767,11 @@ export default function Portfolio() {
             <div className="line2">Software Engineer</div>
           </h1>
           <p className="hero-desc">
-            Estudiante de <strong>Ingeniería en Desarrollo de Software</strong> en la UES.
-            Construyo aplicaciones web full stack con <strong>React, TypeScript y Spring Boot</strong>.
-            Apasionado por la <strong>ciberseguridad</strong> y el desarrollo de sistemas escalables.
+            Desarrollador <strong>Full-Stack</strong> enfocado en construir aplicaciones web
+            robustas, eficientes y escalables. Integro frontends modernos con{" "}
+            <strong>React y TypeScript</strong> junto a backends empresariales con{" "}
+            <strong>Java y Spring Boot</strong>, aplicando buenas prácticas de seguridad,
+            arquitectura y despliegue con <strong>Docker</strong>.
           </p>
           <div className="hero-ctas">
             <a href="#proyectos" className="btn-primary">Ver proyectos →</a>
@@ -705,8 +780,8 @@ export default function Portfolio() {
           <div className="hero-stats">
             {[
               { v: "4+", l: "Proyectos" },
-              { v: "2+", l: "Años codificando" },
-              { v: "5+", l: "Tecnologías" },
+              { v: "10+", l: "Tecnologías" },
+              { v: "B1", l: "Inglés técnico" },
             ].map(({ v, l }) => (
               <div key={l}>
                 <div className="stat-value">{v}</div>
@@ -728,21 +803,23 @@ export default function Portfolio() {
         <div className="about-grid fade-in">
           <div className="about-text">
             <p>
-              Soy <strong>Irving Vladimir Pérez Javier</strong>, estudiante de Ingeniería en Desarrollo de Software en la
-              Universidad de El Salvador (carnet PJ23001). Me apasiona construir soluciones
-              digitales que resuelvan problemas reales con código limpio y arquitecturas bien
-              pensadas.
+              Soy <strong>Irving Vladimir Pérez Javier</strong>, Desarrollador Full-Stack
+              enfocado en la construcción de aplicaciones web robustas, eficientes y
+              escalables. Tengo experiencia práctica en el diseño de APIs REST, arquitectura
+              N-Capas y despliegue de soluciones contenerizadas con Docker.
             </p>
             <p>
               Mi stack principal es <strong>React + TypeScript</strong> en el frontend y{" "}
-              <strong>Spring Boot + Java</strong> en el backend, con bases de datos relacionales
-              como PostgreSQL. También tengo experiencia con metodologías de desarrollo de
-              software como <strong>Waterfall y Unified Process</strong>.
+              <strong>Java + Spring Boot</strong> en el backend, con bases de datos
+              relacionales como PostgreSQL y documentos como MongoDB. Aplico autenticación
+              basada en JWT, documentación de APIs con Swagger/OpenAPI, y metodologías como
+              Scrum y Unified Process.
             </p>
             <p>
-              Fuera del desarrollo, exploro el mundo de la{" "}
-              <strong>ciberseguridad ofensiva</strong> en mi home lab con Kali Linux, y disfruto
-              construir herramientas personales con IA como mi asistente estilo Jarvis.
+              Estoy próximo a graduarme de <strong>Ingeniería en Desarrollo de Software</strong>{" "}
+              en la Universidad de El Salvador. Fuera del desarrollo, exploro{" "}
+              <strong>ciberseguridad ofensiva</strong> (OWASP Top 10, hardening de
+              contenedores) en mi home lab con Kali Linux.
             </p>
           </div>
           <div className="about-card">
@@ -750,10 +827,10 @@ export default function Portfolio() {
             {[
               ["Universidad", "UES"],
               ["Carrera", "Ing. Desarrollo de Software"],
-              ["Carnet", "PJ23001"],
+              ["Estado académico", "Próximo a graduarse"],
               ["Ubicación", "El Salvador"],
-              ["Estado", "Buscando oportunidades"],
-              ["Inglés", "Nivel intermedio"],
+              ["Disponibilidad", "Abierto a oportunidades"],
+              ["Inglés", "B1 — Intermedio"],
             ].map(([k, v]) => (
               <div className="about-info-row" key={k}>
                 <span>{k}</span>
@@ -788,10 +865,36 @@ export default function Portfolio() {
 
       <div className="divider" />
 
+      {/* EXPERIENCE */}
+      <section className="section" id="experiencia">
+        <div className="fade-in">
+          <div className="section-label">// 03. experience</div>
+          <h2 className="section-title">Experiencia <em>laboral</em></h2>
+        </div>
+        <div className="exp-list-wrap">
+          {EXPERIENCE.map((exp, i) => (
+            <div className="exp-item fade-in" key={exp.role} style={{ transitionDelay: `${i * 0.1}s` }}>
+              <div className="exp-header">
+                <span className="exp-role">{exp.role}</span>
+                <span className="exp-date">{exp.date}</span>
+              </div>
+              <div className="exp-company">{exp.company}</div>
+              <ul className="exp-list">
+                {exp.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider" />
+
       {/* PROJECTS */}
       <section className="section" id="proyectos">
         <div className="fade-in">
-          <div className="section-label">// 03. projects</div>
+          <div className="section-label">// 04. projects</div>
           <h2 className="section-title">Mis <em>proyectos</em></h2>
         </div>
         <div className="projects-grid">
@@ -834,14 +937,14 @@ export default function Portfolio() {
       {/* CONTACT */}
       <section className="section" id="contacto">
         <div className="fade-in">
-          <div className="section-label">// 04. contact</div>
+          <div className="section-label">// 05. contact</div>
           <h2 className="section-title">Hablemos <em>pronto</em></h2>
         </div>
         <div className="contact-inner fade-in">
           <div>
             <p className="contact-text">
-              Estoy buscando oportunidades como desarrollador junior o practicante. Si tienes
-              un proyecto interesante o quieres conectar, escríbeme.
+              Estoy abierto a oportunidades como desarrollador Full-Stack o backend junior.
+              Si tienes un proyecto interesante o quieres conectar, escríbeme.
             </p>
             <div className="contact-links">
               {[
@@ -886,3 +989,4 @@ export default function Portfolio() {
     </>
   );
 }
+
