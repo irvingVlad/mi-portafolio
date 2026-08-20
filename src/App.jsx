@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 const NAV_LINKS = ["Inicio", "Sobre mí", "Habilidades", "Experiencia", "Proyectos", "Contacto"];
 
 const SKILLS = {
-  Lenguajes: ["Java", "JavaScript", "TypeScript", "C#", "C++"],
+  Lenguajes: ["Java", "JavaScript", "C#", "C++"],
   Frontend: ["React", "TypeScript", "Vite", "Axios", "HTML5", "CSS3", "Bootstrap", "SASS"],
   "Backend & Frameworks": ["Spring Boot 3.x", "Node.js", "REST APIs", "JWT", "Swagger/OpenAPI"],
   "Bases de Datos": ["PostgreSQL", "MongoDB"],
-  "DevOps & Herramientas": ["Docker", "Docker Compose", "Kubernetes", "Git", "GitHub"],
+  "DevOps & Herramientas": ["Docker", "Docker Compose", "Git", "GitHub"],
   Ciberseguridad: ["OWASP Top 10", "Seguridad Web", "Hardening de Contenedores", "Kali Linux"],
 };
 
@@ -705,6 +706,8 @@ export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
   const [cursor, setCursor] = useState({ x: -100, y: -100 });
   const sectionRefs = useRef([]);
+  const [contactState, handleContactSubmit] = useForm("mvkplqov");
+
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -959,23 +962,70 @@ export default function Portfolio() {
               ))}
             </div>
           </div>
-          <div className="contact-form">
-            <div className="form-group">
-              <label className="form-label">Tu nombre</label>
-              <input className="form-input" type="text" placeholder="John Doe" />
+
+          {contactState.succeeded ? (
+            <div className="contact-form">
+              <p style={{ color: "#2dd4bf" }}>
+                ¡Mensaje enviado! Te responderé pronto.
+              </p>
             </div>
-            <div className="form-group">
-              <label className="form-label">Tu email</label>
-              <input className="form-input" type="email" placeholder="john@email.com" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Mensaje</label>
-              <textarea className="form-textarea" placeholder="Hola Irving, me interesa..." />
-            </div>
-            <button className="btn-primary" style={{ width: "fit-content" }}>
-              Enviar mensaje →
-            </button>
-          </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleContactSubmit}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="name">Tu nombre</label>
+                <input
+                  className="form-input"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="email">Tu email</label>
+                <input
+                  className="form-input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="john@email.com"
+                  required
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={contactState.errors}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="message">Mensaje</label>
+                <textarea
+                  className="form-textarea"
+                  id="message"
+                  name="message"
+                  placeholder="Hola Irving, me interesa..."
+                  required
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={contactState.errors}
+                />
+              </div>
+
+              <button
+                className="btn-primary"
+                style={{ width: "fit-content" }}
+                type="submit"
+                disabled={contactState.submitting}
+              >
+                {contactState.submitting ? "Enviando..." : "Enviar mensaje →"}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
