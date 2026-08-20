@@ -36,36 +36,6 @@ const PROJECTS = [
     github: "https://github.com/irvingVlad/proyecto-Hospital",
     demo: null,
   },
-  {
-    title: "Event Management REST API",
-    description:
-      "Backend built with an N-Tier layered architecture (Controllers, Services, Repositories, Entities) applying the DTO pattern for secure data transfer. Data persistence with PostgreSQL via JPA/Hibernate, JWT-secured endpoints documented interactively with Swagger, and containerized with Docker.",
-    tech: ["Spring Boot", "Java", "PostgreSQL", "JPA/Hibernate", "JWT", "Swagger", "Docker"],
-    color: "#7c6bff",
-    icon: "📅",
-    github: "https://github.com/SalvadorVentura/UESPOO2025-API_eventos_asistentes_gt02_grupo7",
-    demo: null,
-  },
-  {
-    title: "Studio Ghibli Explorer",
-    description:
-      "React web app that consumes the Studio Ghibli API to display films, characters and locations with a clean, responsive interface and efficient HTTP requests via Axios.",
-    tech: ["React", "Vite", "Axios", "CSS3"],
-    color: "#ff6b9d",
-    icon: "🎬",
-    github: "https://github.com/irvingVlad/ghibli-explorer",
-    demo: null,
-  },
-  {
-    title: "Numerical Methods Suite",
-    description:
-      "JavaScript implementation of 6 core numerical methods: Horner, Müller, linear interpolation, Lagrange, and linear regression — with staged Git commit history.",
-    tech: ["JavaScript", "Algorithms", "Numerical Analysis"],
-    color: "#ffd93d",
-    icon: "📐",
-    github: "https://github.com/CDA135-2026/2docorto-irvingVlad",
-    demo: null,
-  },
 ];
 
 const STYLE = `
